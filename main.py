@@ -19,9 +19,10 @@ def start(message):
     btn_victorina = types.KeyboardButton('Пройти викторину')
     btn_info_opeck = types.KeyboardButton('Программа опеки')
     btn_contact = types.KeyboardButton('Контактная информация')
+    btn_restart = types.KeyboardButton("Перезапустить бота")
     markup.row(btn_victorina)
     markup.row(btn_info_opeck, btn_list)
-    markup.row(btn_help,btn_contact)
+    markup.row(btn_help, btn_contact, btn_restart)
     bot.send_message(message.chat.id,f'Привет, {message.chat.first_name} \nЯ bot Московского Zooпарка \nСкорее начни проходить викторину состоящую из {len(questions)} вопросов на определение твоего тотемного животного нажав на кнопку - "Пройти викторину" \nЕсли хочешь узнать что я умею нажми на кнопку - "Узнать больше"', reply_markup=markup)
 
 
@@ -284,16 +285,16 @@ def bot_message(message):
     elif message.text == 'Программа опеки':
         bot.send_message(message.chat.id, info_opeck)
     elif message.text == 'Главное меню':
-        print(message.chat.id)
         markup = types.ReplyKeyboardMarkup()
         btn_help = types.KeyboardButton('Узнать больше')
         btn_list = types.KeyboardButton('Список животных')
         btn_victorina = types.KeyboardButton('Пройти викторину')
         btn_info_opeck = types.KeyboardButton('Программа опеки')
         btn_contact = types.KeyboardButton('Контактная информация')
+        btn_restart = types.KeyboardButton("Перезапустить бота")
         markup.row(btn_victorina)
         markup.row(btn_info_opeck, btn_list)
-        markup.row(btn_help, btn_contact)
+        markup.row(btn_help, btn_contact, btn_restart)
         if res_vict != None:
             btn_res_vic = types.KeyboardButton("Поделиться результатом викторины")
             markup.row(btn_res_vic)
@@ -317,6 +318,8 @@ def bot_message(message):
         btn_link = types.InlineKeyboardButton("Поделиться в Telegram", url=f"https://t.me/share/url?url=https%3A%2F%2Ft.me%2Fmskzoohelperbot%2F \n{text}")
         markup.row(btn_link)
         bot.send_message(message.chat.id,"Поделиться в Telegram ", reply_markup=markup )
+    elif message.text == 'Перезапустить бота':
+        start(message)
     else:
         bot.send_message(admin_id,f"Пользователь @{message.chat.username} \n\nОставил обратную связь: \n\n{message.text}")
         bot.send_message(message.chat.id,"Спасибо за обратную связь, она уже отправлена сотруднику")
