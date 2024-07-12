@@ -313,7 +313,7 @@ def bot_message(message):
     elif message.text == 'Контактная информация':
         bot.send_message(message.chat.id,f"Наши контактные данные \nЭлектронная почта {email}, \nНомер телефона {number_phone} \nСвязь с сотрудником /Contact")
     elif message.text == 'Поделиться результатом викторины':
-        text = f"Привет, приглашаю тебя пройти викторину на определение тотемного животного.\nВот мой результат: \n{res_vict.split("\n")[0]}, тебе подходят такие животные как..."#res_vict.split("\n")[0]
+        text = f"Привет, приглашаю тебя пройти викторину на определение тотемного животного.\nВот мой результат: \n{res_vict.split("\n")[0]} Тебе подходят такие животные как..."#res_vict.split("\n")[0]
         markup = types.InlineKeyboardMarkup()
         btn_link = types.InlineKeyboardButton("Поделиться в Telegram", url=f"https://t.me/share/url?url=https%3A%2F%2Ft.me%2Fmskzoohelperbot%2F \n{text}")
         markup.row(btn_link)
